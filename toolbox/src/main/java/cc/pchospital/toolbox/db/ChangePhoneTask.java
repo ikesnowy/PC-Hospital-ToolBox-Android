@@ -12,6 +12,7 @@ import java.util.List;
 
 import cc.pchospital.toolbox.R;
 import cc.pchospital.toolbox.SettingsFragment;
+import cc.pchospital.toolbox.gson.Staff;
 import cc.pchospital.toolbox.gson.User;
 import cc.pchospital.toolbox.util.HttpUtil;
 import okhttp3.Response;
@@ -36,9 +37,9 @@ public class ChangePhoneTask extends AsyncTask<String, String, Boolean> {
             Response response = HttpUtil.sendGetOkHttpRequest(strings[0]);
             String responseData = response.body().string();
             Gson gson = new Gson();
-            List<User> users = gson.fromJson(responseData,
-                    new TypeToken<List<User>>(){}.getType());
-            if (users.size() == 0) {
+            List<Staff> staffList = gson.fromJson(responseData,
+                    new TypeToken<List<Staff>>(){}.getType());
+            if (staffList.size() == 0) {
                 return false;
             }
         } catch (Exception e) {
@@ -54,13 +55,13 @@ public class ChangePhoneTask extends AsyncTask<String, String, Boolean> {
         if (aBoolean) {
             result = settings.get().getString(R.string.toast_settings_user_info_update_successfully);
             // 操作确认
-            settings.get().reloadUserInfo();
+            settings.get().reloadStaffInfo();
         } else {
             result = settings.get().getString(R.string.toast_settings_user_info_update_failed);
             // 回滚操作
             SharedPreferences.Editor editor =
                     settings.get().getSharedPreferences().edit();
-            editor.putString(settings.get().getString(R.string.app_db_user_uphone), oldPhone);
+            editor.putString(settings.get().getString(R.string.app_db_staff_sphone), oldPhone);
             editor.apply();
         }
         Toast.makeText(settings.get().getActivity(),

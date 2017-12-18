@@ -4,19 +4,24 @@
         android:title="@string/settings_screens_user_settings">
 
         <Preference
-            android:key="@string/app_db_user_uid"
-            android:title="@string/settings_items_uid"
+            android:key="@string/app_db_staff_sid"
+            android:title="@string/settings_items_sid"
+            android:summary="@string/settings_default_values_null"/>
+
+        <Preference
+            android:key="@string/app_db_staff_snumber"
+            android:title="@string/settings_items_staff_number"
             android:summary="@string/settings_default_values_null"/>
 
         <EditTextPreference
-            android:key="@string/app_db_user_uname"
-            android:title="@string/settings_items_user_name"
+            android:key="@string/app_db_staff_sname"
+            android:title="@string/settings_items_staff_name"
             android:summary="@string/settings_default_values_null"
             android:inputType="text"/>
 
         <EditTextPreference
-            android:key="@string/app_db_user_uphone"
-            android:title="@string/settings_items_user_phone"
+            android:key="@string/app_db_staff_sphone"
+            android:title="@string/settings_items_staff_phone"
             android:summary="@string/settings_default_values_null"
             android:inputType="number"
             />

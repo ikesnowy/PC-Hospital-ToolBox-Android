@@ -59,7 +59,7 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         SharedPreferences userProfile = PreferenceManager.getDefaultSharedPreferences(getContext());
-        userId = userProfile.getString(getString(R.string.app_db_user_uid), "");
+        userId = userProfile.getString(getString(R.string.app_db_staff_sid), "");
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         refreshListener =
@@ -70,7 +70,7 @@ public class MainFragment extends Fragment {
                         HttpUtil.buildURL(
                                 getString(R.string.app_network_server_ip),
                                 getString(R.string.app_network_query_cards),
-                                getString(R.string.app_db_user_uid),
+                                getString(R.string.app_db_staff_sid),
                                 userId);
                 new PullCardsTask(MainFragment.this).execute(url);
             }

@@ -30,7 +30,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/nav_username"
+            android:id="@+id/nav_staff_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
@@ -38,7 +38,7 @@
             android:textSize="@dimen/nav_font_username_text"/>
 
         <TextView
-            android:id="@+id/nav_phone"
+            android:id="@+id/nav_staff_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""

@@ -23,8 +23,8 @@ public class SettingsFragment extends PreferenceFragment
         implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     SharedPreferences sharedPreferences;
-    private String userNameBackup;
-    private String userPhoneBackup;
+    private String staffNameBackup;
+    private String staffPhoneBackup;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -41,10 +41,10 @@ public class SettingsFragment extends PreferenceFragment
                 .registerOnSharedPreferenceChangeListener(this);
         sharedPreferences = getPreferenceScreen().getSharedPreferences();
         initSummery(getPreferenceScreen());
-        userNameBackup =
-                sharedPreferences.getString(getString(R.string.app_db_user_uname), null);
-        userPhoneBackup =
-                sharedPreferences.getString(getString(R.string.app_db_user_uphone), null);
+        staffNameBackup =
+                sharedPreferences.getString(getString(R.string.app_db_staff_sphone), null);
+        staffPhoneBackup =
+                sharedPreferences.getString(getString(R.string.app_db_staff_sphone), null);
 
         // 切换用户按钮监听
         Preference preference = findPreference(getString(R.string.settings_items_change_user));
@@ -72,7 +72,7 @@ public class SettingsFragment extends PreferenceFragment
         switchLanguage.setSummary(getString(R.string.app_locale));
 
         // 用户名修改校验
-        Preference userNameEditText = findPreference(getString(R.string.app_db_user_uname));
+        Preference userNameEditText = findPreference(getString(R.string.app_db_staff_sname));
         userNameEditText.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -90,7 +90,7 @@ public class SettingsFragment extends PreferenceFragment
         });
 
         // 手机号修改校验
-        Preference userPhoneEditText = findPreference(getString(R.string.app_db_user_uphone));
+        Preference userPhoneEditText = findPreference(getString(R.string.app_db_staff_sphone));
         userPhoneEditText.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -114,32 +114,32 @@ public class SettingsFragment extends PreferenceFragment
         if (key.equals(getString(R.string.app_db_push_enabled))) {
             return;
         }
-        if (key.equals(getString(R.string.app_db_user_uname))) {
+        if (key.equals(getString(R.string.app_db_staff_sname))) {
 
-            String uid = sharedPreferences.getString(getString(R.string.app_db_user_uid),
+            String sid = sharedPreferences.getString(getString(R.string.app_db_staff_sid),
                     null);
-            String uname = sharedPreferences.getString(key, null);
+            String sname = sharedPreferences.getString(key, null);
             String url = HttpUtil.buildURL(
                     getString(R.string.app_network_server_ip),
                     getString(R.string.app_network_change_name_page),
-                    getString(R.string.app_db_user_uid),
-                    uid,
-                    getString(R.string.app_db_user_uname),
-                    uname);
-            new ChangeNameTask(this, userNameBackup)
+                    getString(R.string.app_db_staff_sid),
+                    sid,
+                    getString(R.string.app_db_staff_sname),
+                    sname);
+            new ChangeNameTask(this, staffNameBackup)
                     .execute(url);
-        } else if (key.equals(getString(R.string.app_db_user_uphone))) {
-            String uid = sharedPreferences.getString(getString(R.string.app_db_user_uid),
+        } else if (key.equals(getString(R.string.app_db_staff_sphone))) {
+            String uid = sharedPreferences.getString(getString(R.string.app_db_staff_sid),
                     null);
             String uphone = sharedPreferences.getString(key, null);
             String url = HttpUtil.buildURL(
                     getString(R.string.app_network_server_ip),
                     getString(R.string.app_network_change_phone_page),
-                    getString(R.string.app_db_user_uid),
+                    getString(R.string.app_db_staff_sid),
                     uid,
-                    getString(R.string.app_db_user_uphone),
+                    getString(R.string.app_db_staff_sphone),
                     uphone);
-            new ChangePhoneTask(this, userPhoneBackup)
+            new ChangePhoneTask(this, staffPhoneBackup)
                     .execute(url);
         }
         Preference preference = findPreference(key);
@@ -192,11 +192,11 @@ public class SettingsFragment extends PreferenceFragment
     }
 
 
-    public void reloadUserInfo() {
-        userNameBackup =
-                sharedPreferences.getString(getString(R.string.app_db_user_uname), null);
-        userPhoneBackup =
-                sharedPreferences.getString(getString(R.string.app_db_user_uphone), null);
+    public void reloadStaffInfo() {
+        staffNameBackup =
+                sharedPreferences.getString(getString(R.string.app_db_staff_sname), null);
+        staffPhoneBackup =
+                sharedPreferences.getString(getString(R.string.app_db_staff_sphone), null);
     }
 
     public SharedPreferences getSharedPreferences() {

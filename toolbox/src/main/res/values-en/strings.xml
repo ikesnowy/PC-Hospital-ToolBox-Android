@@ -11,7 +11,7 @@
     <string name="title_your_ticket">Your Ticket</string>
     <string name="title_login">Sign in</string>
     <string name="label_login_phone">Phone Number</string>
-    <string name="button_login_login_or_register">Sign in or Sign up</string>
+    <string name="button_login_login">Sign in</string>
     <string name="hint_login_phone_number">Phone Number</string>
     <string name="hint_login_name">Name</string>
     <string name="hint_add_ticket_name">What\'s your name?</string>
@@ -74,4 +74,10 @@
     <string name="label_ticket_detail_states">State</string>
     <string name="toast_ticket_detail_copy_to_clipboard_successfully">Copied to clipboard</string>
     <string name="title_navigation_to">Location Detail</string>
+    <string name="toast_login_no_such_user">Check your name or phone and try again</string>
+    <string name="settings_items_sid">Staff ID</string>
+    <string name="settings_items_staff_name">Name</string>
+    <string name="settings_items_staff_phone">Phone Number</string>
+    <string name="settings_items_staff_number">Student ID</string>
+    <string name="title_ticket_all_ticket">Ticket List</string>
 </resources>

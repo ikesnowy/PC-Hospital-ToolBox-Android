@@ -11,7 +11,7 @@
     <string name="title_your_ticket">你的工单</string>
     <string name="title_login">登录</string>
     <string name="label_login_phone">手机号</string>
-    <string name="button_login_login_or_register">登录或注册</string>
+    <string name="button_login_login">登录</string>
     <string name="hint_login_phone_number">手机号</string>
     <string name="hint_login_name">姓名</string>
     <string name="hint_add_ticket_name">联系人</string>
@@ -74,4 +74,10 @@
     <string name="label_ticket_detail_states">工单状态</string>
     <string name="toast_ticket_detail_copy_to_clipboard_successfully">已复制到剪贴板</string>
     <string name="title_navigation_to">位置详情</string>
+    <string name="toast_login_no_such_user">登录失败，用户不存在</string>
+    <string name="settings_items_sid">ID</string>
+    <string name="settings_items_staff_name">修改姓名</string>
+    <string name="settings_items_staff_phone">修改手机号</string>
+    <string name="settings_items_staff_number">学号</string>
+    <string name="title_ticket_all_ticket">工单列表</string>
 </resources>

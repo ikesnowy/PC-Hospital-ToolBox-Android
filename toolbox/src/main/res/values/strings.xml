@@ -12,7 +12,7 @@
     <string name="title_your_ticket">Your Ticket</string>
     <string name="title_login">Sign in</string>
     <string name="label_login_phone">Phone Number</string>
-    <string name="button_login_login_or_register">Sign in or Sign up</string>
+    <string name="button_login_login">Sign in</string>
     <string name="hint_login_phone_number">Phone Number…</string>
     <string name="hint_login_name">Name</string>
     <string name="hint_add_ticket_name">What\'s your name?</string>
@@ -29,7 +29,7 @@
     <string name="toast_ticket_need_login">Please login first</string>
     <string name="app_network_server_ip" translatable="false">123.206.201.200</string>
     <string name="app_local_user_profile_filename" translatable="false">userProfile</string>
-    <string name="app_network_login_page" translatable="false">login.jsp</string>
+    <string name="app_network_login_page" translatable="false">staffLogin.jsp</string>
     <string name="app_db_user_uid" translatable="false">uid</string>
     <string name="app_db_user_uname" translatable="false">uname</string>
     <string name="app_db_user_uphone" translatable="false">uphone</string>
@@ -56,10 +56,10 @@
     <string name="settings_items_language">Language</string>
     <string name="app_locale">English</string>
     <string name="title_dialog_change_user_info">Uploading new information</string>
-    <string name="app_network_change_name_page" translatable="false">changeName.jsp</string>
+    <string name="app_network_change_name_page" translatable="false">changeStaffName.jsp</string>
     <string name="toast_settings_user_info_update_successfully">New contacts has been applied</string>
     <string name="toast_settings_user_info_update_failed">Update contacts failed, check your Internet</string>
-    <string name="app_network_change_phone_page" translatable="false">changePhone.jsp</string>
+    <string name="app_network_change_phone_page" translatable="false">changeStaffPhone.jsp</string>
     <string name="label_ticket_uploading">Uploading</string>
     <string name="label_ticket_uploaded">Sent!</string>
     <string name="label_ticket_unread">Unread</string>
@@ -76,7 +76,7 @@
     <string name="app_ticket_states_complete" translatable="false">complete</string>
     <string name="app_ticket_states_canceled" translatable="false">canceled</string>
     <string name="app_ticket_states_failed" translatable="false">failed</string>
-    <string name="app_network_query_cards" translatable="false">queryCards.jsp</string>
+    <string name="app_network_query_cards" translatable="false">queryAllCards.jsp</string>
     <string name="label_main_no_cards_title">Nothing there</string>
     <string name="label_main_no_card_content">Press \'+\' to add a ticket</string>
     <string name="toast_add_ticket_no_gps">Can\'t get your location</string>
@@ -113,4 +113,15 @@
     <string name="label_ticket_detail_states">State</string>
     <string name="toast_ticket_detail_copy_to_clipboard_successfully">Copied to clipboard</string>
     <string name="title_navigation_to">Location Detail</string>
+    <string name="app_db_staff_sid" translatable="false">sid</string>
+    <string name="app_db_staff_sname" translatable="false">sname</string>
+    <string name="app_db_staff_stitle" translatable="false">stitle</string>
+    <string name="app_db_staff_sphone" translatable="false">sphone</string>
+    <string name="toast_login_no_such_user">Check your name or phone and try again</string>
+    <string name="settings_items_sid">Staff ID</string>
+    <string name="settings_items_staff_name">Name</string>
+    <string name="settings_items_staff_phone">Phone Number</string>
+    <string name="settings_items_staff_number">Student ID</string>
+    <string name="app_db_staff_snumber" translatable="false">snumber</string>
+    <string name="title_ticket_all_ticket">Ticket List</string>
 </resources>

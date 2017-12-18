@@ -11,11 +11,12 @@ import android.view.View;
 import android.widget.Button;
 
 import cc.pchospital.toolbox.db.LoginTask;
+import cc.pchospital.toolbox.gson.Staff;
 import cc.pchospital.toolbox.gson.User;
 import cc.pchospital.toolbox.util.HttpUtil;
 
 public class LoginActivity extends AppCompatActivity {
-    public User user;
+    public Staff user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,7 @@ public class LoginActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-
-
-        user = new User();
+        user = new Staff();
         Button language = findViewById(R.id.language);
         language.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,16 +57,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 输入校验
                 TextInputEditText inputname = findViewById(R.id.input_name);
-                String uname = inputname.getText().toString();
+                String sname = inputname.getText().toString();
                 TextInputEditText inputphone = findViewById(R.id.input_phone);
-                String uphone = inputphone.getText().toString();
-                if (uname.length() > 40){
+                String sphone = inputphone.getText().toString();
+                if (sname.length() > 40){
                     inputname.setError(getString(R.string.error_login_name_too_long));
                     return;
-                } else if (uname.length() == 0) {
+                } else if (sname.length() == 0) {
                     inputname.setError(getString(R.string.error_login_no_name));
                     return;
-                } else if (uphone.length() != 11) {
+                } else if (sphone.length() != 11) {
                     inputphone.setError(getString(R.string.error_login_invalid_phone_number));
                     return;
                 }
@@ -76,10 +75,10 @@ public class LoginActivity extends AppCompatActivity {
                 String url = HttpUtil.buildURL(
                         getString(R.string.app_network_server_ip),
                         getString(R.string.app_network_login_page),
-                        getString(R.string.app_db_user_uname),
-                        uname,
-                        getString(R.string.app_db_user_uphone),
-                        uphone);
+                        getString(R.string.app_db_staff_sname),
+                        sname,
+                        getString(R.string.app_db_staff_sphone),
+                        sphone);
                 new LoginTask(LoginActivity.this).execute(url);
             }
         });

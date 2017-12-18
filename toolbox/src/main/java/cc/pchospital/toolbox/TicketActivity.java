@@ -37,10 +37,12 @@ public class TicketActivity extends AppCompatActivity {
     private static final int TYPE_ADD_TICKET = 3;
 
     private DrawerLayout mDrawerLayout;
-    private TextView uName;
-    private TextView uPhone;
+    private TextView sName;
+    private TextView sTitle;
     SharedPreferences userProfile;
     MainFragment mainFragment;
+
+    private int resultCode = 0;
 
     private static final String TAG = "TicketActivity";
     @Override
@@ -59,7 +61,7 @@ public class TicketActivity extends AppCompatActivity {
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.icon_menu);
-            actionBar.setTitle(R.string.title_your_ticket);
+            actionBar.setTitle(R.string.title_ticket_all_ticket);
         }
 
         // UI-FloatingActionButton
@@ -83,8 +85,8 @@ public class TicketActivity extends AppCompatActivity {
         });
         navigationView.setCheckedItem(R.id.nav_main);
         // UI-Name TextView and Phone TextView
-        uName = navigationView.getHeaderView(0).findViewById(R.id.nav_username);
-        uPhone = navigationView.getHeaderView(0).findViewById(R.id.nav_phone);
+        sName = navigationView.getHeaderView(0).findViewById(R.id.nav_staff_name);
+        sTitle = navigationView.getHeaderView(0).findViewById(R.id.nav_staff_title);
         // UI-Setting Button
         ImageButton settings = navigationView.getHeaderView(0).findViewById(R.id.nav_settings);
         settings.setOnClickListener(new View.OnClickListener() {
@@ -103,9 +105,9 @@ public class TicketActivity extends AppCompatActivity {
                     case R.id.nav_main:
                         mDrawerLayout.closeDrawers();
                         if (actionBar != null) {
-                            actionBar.setTitle(R.string.title_your_ticket);
+                            actionBar.setTitle(R.string.title_ticket_all_ticket);
                         }
-                        fab.setVisibility(View.VISIBLE);
+                        fab.setVisibility(View.GONE);
                         replaceFragment(new MainFragment());
                         break;
                     case R.id.nav_about:
@@ -143,21 +145,20 @@ public class TicketActivity extends AppCompatActivity {
         // 自动登录，如果没有自动登录信息则跳转到登录界面
         userProfile =
                 PreferenceManager.getDefaultSharedPreferences(this);
-        String userid = userProfile.getString(getString(R.string.app_db_user_uid), null);
+        String userid = userProfile.getString(getString(R.string.app_db_staff_sid), null);
         if (userid == null) {
             Intent intent = new Intent(TicketActivity.this, LoginActivity.class);
             Toast.makeText(this, getString(R.string.toast_ticket_need_login),
                     Toast.LENGTH_SHORT).show();
             startActivityForResult(intent, TYPE_LOGIN);
-            finish();
         } else {
             // UI-NavigationHead
             updateUserInfo();
+            // 启动主 Fragment
+            mainFragment = new MainFragment();
+            replaceFragment(mainFragment);
         }
 
-        // 启动主 Fragment
-        mainFragment = new MainFragment();
-        replaceFragment(mainFragment);
     }
 
     @Override
@@ -176,21 +177,24 @@ public class TicketActivity extends AppCompatActivity {
         switch (requestCode) {
             case TYPE_LOGIN:
                 if (resultCode == RESULT_OK) {
-                    SharedPreferences userProfile =
+                    SharedPreferences staffProfile =
                             PreferenceManager.getDefaultSharedPreferences(this);
-                    String userid = userProfile.getString(getString(R.string.app_db_user_uid),
+                    String staffID = staffProfile.getString(getString(R.string.app_db_staff_sid),
                             null);
-                    if (userid == null) {
+                    if (staffID == null) {
                         Log.e(TAG, "onActivityResult: Unexpected Error!");
                         finish();
                     }
-                    String userName = userProfile.getString(getString(R.string.app_db_user_uname),
+                    String staffName = staffProfile.getString(getString(R.string.app_db_staff_sname),
                             null);
-                    String userPhone = userProfile.getString(getString(R.string.app_db_user_uphone),
+                    String staffTitle = staffProfile.getString(getString(R.string.app_db_staff_stitle),
                             null);
                     // UI-NavigationHead
-                    uName.setText(userName);
-                    uPhone.setText(userPhone);
+                    sName.setText(staffName);
+                    sTitle.setText(staffTitle);
+                    // UI-StartFragment
+                    mainFragment = new MainFragment();
+                    replaceFragment(mainFragment);
                 } else if (resultCode == RESULT_CANCELED) {
                     String resultdata = data.getStringExtra
                             (getString(R.string.app_intent_extra_login));
@@ -232,9 +236,9 @@ public class TicketActivity extends AppCompatActivity {
     }
 
     private void updateUserInfo() {
-        uName.setText(userProfile.getString(getString(R.string.app_db_user_uname),
+        sName.setText(userProfile.getString(getString(R.string.app_db_staff_sname),
                 null));
-        uPhone.setText(userProfile.getString(getString(R.string.app_db_user_uphone),
+        sTitle.setText(userProfile.getString(getString(R.string.app_db_staff_stitle),
                 null));
     }
 }
