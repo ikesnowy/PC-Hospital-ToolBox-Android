@@ -4,10 +4,13 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +22,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
+import cc.pchospital.toolbox.db.AcceptTicketTask;
+import cc.pchospital.toolbox.db.ChangeTicketStateTask;
 import cc.pchospital.toolbox.db.PullTicketTask;
 import cc.pchospital.toolbox.util.DictionaryUtil;
 import cc.pchospital.toolbox.util.HttpUtil;
@@ -28,6 +33,7 @@ public class TicketDetailActivity extends AppCompatActivity {
 
     public Ticket ticket;
     public SwipeRefreshLayout swipeRefreshLayout;
+
     private SwipeRefreshLayout.OnRefreshListener listener;
     private TextView ticketState;
     private TextView ticketNotes;
@@ -35,6 +41,10 @@ public class TicketDetailActivity extends AppCompatActivity {
     private TextView ticketName;
     private TextView ticketPhone;
     private Button ticketLocation;
+    private String sid;
+
+    public CardView acceptTicket;
+    public CardView completeTicket;
 
     public static void actionStart(Context context, String ticketId) {
         Intent intent = new Intent(context, TicketDetailActivity.class);
@@ -49,6 +59,8 @@ public class TicketDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String ticketId = intent.getStringExtra("ticketId");
+        SharedPreferences staffPreference = PreferenceManager.getDefaultSharedPreferences(this);
+        sid = staffPreference.getString(getString(R.string.app_db_staff_sid), "");
 
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
@@ -92,12 +104,41 @@ public class TicketDetailActivity extends AppCompatActivity {
             }
         });
         ticketLocation = findViewById(R.id.detail_location);
+
+        acceptTicket = findViewById(R.id.accept_card);
+        acceptTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                acceptTicket.setEnabled(false);
+                String url = HttpUtil.buildURL(
+                        getString(R.string.app_network_server_ip),
+                        getString(R.string.app_network_accept_ticket_page),
+                        getString(R.string.app_db_ticket_sid),
+                        sid,
+                        getString(R.string.app_db_ticket_tid),
+                        ticket.getTicketId(),
+                        getString(R.string.app_db_ticket_state),
+                        getString(R.string.app_ticket_states_accepted)
+                );
+                new AcceptTicketTask(TicketDetailActivity.this).execute(url);
+            }
+        });
+
+        completeTicket = findViewById(R.id.complete_card);
+        completeTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeTicket.setEnabled(false);
+                changeTicketState(getString(R.string.app_ticket_states_complete));
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         refreshTicket();
+
     }
 
     @Override
@@ -122,7 +163,7 @@ public class TicketDetailActivity extends AppCompatActivity {
         return true;
     }
 
-    private void refreshTicket() {
+    public void refreshTicket() {
         swipeRefreshLayout.setRefreshing(true);
         listener.onRefresh();
     }
@@ -167,5 +208,37 @@ public class TicketDetailActivity extends AppCompatActivity {
 
         // NoteCard
         ticketNotes.setText(ticket.getTicketNote());
+
+        // Operation Depends on state
+        String ticketState = ticket.getTicketStates();
+        if (ticketState.equals(getString(R.string.app_ticket_states_unread))) {
+            changeTicketState(getString(R.string.app_ticket_states_noticed));
+            acceptTicket.setVisibility(View.GONE);
+            completeTicket.setVisibility(View.GONE);
+        } else if (ticketState.equals(getString(R.string.app_ticket_states_noticed))) {
+            acceptTicket.setVisibility(View.VISIBLE);
+            acceptTicket.setEnabled(true);
+            completeTicket.setVisibility(View.GONE);
+        } else if (ticketState.equals(getString(R.string.app_ticket_states_accepted))) {
+            acceptTicket.setVisibility(View.GONE);
+            completeTicket.setVisibility(View.VISIBLE);
+            completeTicket.setEnabled(true);
+        } else {
+            acceptTicket.setVisibility(View.GONE);
+            completeTicket.setVisibility(View.GONE);
+        }
+
+    }
+
+    public void changeTicketState(String state) {
+        String url = HttpUtil.buildURL(
+                getString(R.string.app_network_server_ip),
+                getString(R.string.app_network_change_ticket_state_page),
+                getString(R.string.app_db_ticket_tid),
+                ticket.getTicketId(),
+                getString(R.string.app_db_ticket_state),
+                state
+        );
+        new ChangeTicketStateTask(this).execute(url);
     }
 }

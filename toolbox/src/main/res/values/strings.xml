@@ -124,4 +124,10 @@
     <string name="settings_items_staff_number">Student ID</string>
     <string name="app_db_staff_snumber" translatable="false">snumber</string>
     <string name="title_ticket_all_ticket">Ticket List</string>
+    <string name="app_network_change_ticket_state_page" translatable="false">changeTicketState.jsp</string>
+    <string name="button_ticket_detail_accept">Accept Ticket</string>
+    <string name="toast_ticket_activity_accept_ticket_failed">Accept ticket failed, check your Internet</string>
+    <string name="app_network_accept_ticket_page" translatable="false">acceptTicket.jsp</string>
+    <string name="button_ticket_detail_complete_ticket">Complete</string>
+    <string name="toast_ticket_detail_update_state_failed">Update ticket state failed, check your Internet</string>
 </resources>

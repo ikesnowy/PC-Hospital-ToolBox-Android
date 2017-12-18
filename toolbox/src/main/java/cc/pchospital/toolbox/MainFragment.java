@@ -85,6 +85,12 @@ public class MainFragment extends Fragment {
         super.onStart();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshCards();
+    }
+
     public void refreshCards() {
         swipeRefreshLayout.setRefreshing(true);
         refreshListener.onRefresh();

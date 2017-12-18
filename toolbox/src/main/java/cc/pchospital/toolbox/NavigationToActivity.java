@@ -1,7 +1,13 @@
 package cc.pchospital.toolbox;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +23,9 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NavigationToActivity extends AppCompatActivity {
 
     public static void actionStart(Context context, Double LocationLa, Double LocationLo){
@@ -27,6 +36,7 @@ public class NavigationToActivity extends AppCompatActivity {
     }
 
     MapView map = null;
+    LatLng target = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +54,12 @@ public class NavigationToActivity extends AppCompatActivity {
 
 
         Intent it = getIntent();
-        LatLng target = new LatLng(it.getDoubleExtra("Latitude", 0.0),
+        target = new LatLng(it.getDoubleExtra("Latitude", 0.0),
                 it.getDoubleExtra("Longitude", 0.0));
 
-        initMap(target);
+        if (requestPermissions()){
+            initMap(target);
+        }
     }
 
     @Override
@@ -91,6 +103,23 @@ public class NavigationToActivity extends AppCompatActivity {
         map.onSaveInstanceState(outState);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0) {
+                    for (int result : grantResults) {
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            finish();
+                        }
+                    }
+                    initMap(target);
+                }
+                break;
+            default:
+        }
+    }
+
     void initMap(LatLng target){
         AMap aMap = map.getMap();
         MyLocationStyle myLocationStyle = new MyLocationStyle();
@@ -106,5 +135,28 @@ public class NavigationToActivity extends AppCompatActivity {
         aMap.animateCamera(update);
 
         aMap.addMarker(new MarkerOptions().position(target));
+    }
+
+    private boolean requestPermissions() {
+        List<String> permissionList = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(NavigationToActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (ContextCompat.checkSelfPermission(NavigationToActivity.this,
+                Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(NavigationToActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+
+        if (!permissionList.isEmpty()) {
+            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(NavigationToActivity.this, permissions, 1);
+            return false;
+        }
+        return true;
     }
 }

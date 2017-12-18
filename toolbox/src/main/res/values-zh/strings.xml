@@ -80,4 +80,8 @@
     <string name="settings_items_staff_phone">修改手机号</string>
     <string name="settings_items_staff_number">学号</string>
     <string name="title_ticket_all_ticket">工单列表</string>
+    <string name="button_ticket_detail_accept">接受工单</string>
+    <string name="toast_ticket_activity_accept_ticket_failed">接受工单失败，检查你的网络</string>
+    <string name="button_ticket_detail_complete_ticket">完成工单</string>
+    <string name="toast_ticket_detail_update_state_failed">更新工单状态失败，检查你的网络</string>
 </resources>

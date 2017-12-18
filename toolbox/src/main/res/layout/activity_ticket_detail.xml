@@ -142,6 +142,50 @@
                             android:textColor="@android:color/black"/>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/accept_card"
+                    android:layout_margin="@dimen/card_margin"
+                    android:layout_column="0"
+                    android:layout_row="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/States_accepted"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_margin="@dimen/card_normal_padding"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/States_accepted"
+                        android:text="@string/button_ticket_detail_accept"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/ticket_detail_form_title"
+                        android:textColor="@android:color/white"/>
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/complete_card"
+                    android:layout_margin="@dimen/card_margin"
+                    android:layout_column="0"
+                    android:layout_row="4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/States_complete"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_margin="@dimen/card_normal_padding"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/States_complete"
+                        android:text="@string/button_ticket_detail_complete_ticket"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/ticket_detail_form_title"
+                        android:textColor="@android:color/white"/>
+                </android.support.v7.widget.CardView>
             </GridLayout>
         </android.support.v4.widget.NestedScrollView>
 
