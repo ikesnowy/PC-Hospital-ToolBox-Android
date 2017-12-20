@@ -86,4 +86,6 @@
     <string name="toast_ticket_detail_update_state_failed">更新工单状态失败，检查你的网络</string>
     <string name="label_ticket_detail_photo_card">照片</string>
     <string name="title_picture_detail">图片详情</string>
+    <string name="nav_help">维修宝典</string>
+    <string name="title_help_center">维修宝典</string>
 </resources>

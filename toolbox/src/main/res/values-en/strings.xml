@@ -86,4 +86,6 @@
     <string name="toast_ticket_detail_update_state_failed">Update ticket state failed, check your Internet</string>
     <string name="label_ticket_detail_photo_card">Photo</string>
     <string name="title_picture_detail">Photo Detail</string>
+    <string name="nav_help">Help Center</string>
+    <string name="title_help_center">Help Center</string>
 </resources>

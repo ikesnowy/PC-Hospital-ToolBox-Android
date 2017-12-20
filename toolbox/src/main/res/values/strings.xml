@@ -8,7 +8,7 @@
 
     <string name="nav_home">Home</string>
     <string name="title_about">About</string>
-    <string name="app_version" translatable="false">Build 28</string>
+    <string name="app_version" translatable="false">Build 30</string>
     <string name="title_your_ticket">Your Ticket</string>
     <string name="title_login">Sign in</string>
     <string name="label_login_phone">Phone Number</string>
@@ -132,4 +132,9 @@
     <string name="toast_ticket_detail_update_state_failed">Update ticket state failed, check your Internet</string>
     <string name="label_ticket_detail_photo_card">Photo</string>
     <string name="title_picture_detail">Photo Detail</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_network_query_all_tips_page" translatable="false">queryAllTips.jsp</string>
+    <string name="nav_help">Help Center</string>
+    <string name="title_help_center">Help Center</string>
 </resources>

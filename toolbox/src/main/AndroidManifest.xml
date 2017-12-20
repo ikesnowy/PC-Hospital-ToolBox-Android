@@ -67,7 +67,8 @@
         <activity
             android:name=".NavigationToActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".PhotoDetailActivity"></activity>
+        <activity android:name=".PhotoDetailActivity" />
+        <activity android:name=".WebActivity"></activity>
     </application>
 
 </manifest>

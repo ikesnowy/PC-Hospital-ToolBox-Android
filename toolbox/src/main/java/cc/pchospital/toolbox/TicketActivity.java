@@ -42,8 +42,6 @@ public class TicketActivity extends AppCompatActivity {
     SharedPreferences userProfile;
     MainFragment mainFragment;
 
-    private int resultCode = 0;
-
     private static final String TAG = "TicketActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +103,13 @@ public class TicketActivity extends AppCompatActivity {
                             actionBar.setTitle(R.string.title_about);
                         }
                         replaceFragment(new AboutFragment());
+                        break;
+                    case R.id.nav_help:
+                        mDrawerLayout.closeDrawers();
+                        if (actionBar != null) {
+                            actionBar.setTitle(R.string.title_help_center);
+                        }
+                        replaceFragment(new TipsFragment());
                         break;
                     default:
                         break;
