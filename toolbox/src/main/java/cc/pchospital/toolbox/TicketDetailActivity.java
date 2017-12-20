@@ -15,8 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -45,6 +49,9 @@ public class TicketDetailActivity extends AppCompatActivity {
 
     public CardView acceptTicket;
     public CardView completeTicket;
+
+    private CardView ticketPhotoCard;
+    private ImageButton[] ticketPhotos;
 
     public static void actionStart(Context context, String ticketId) {
         Intent intent = new Intent(context, TicketDetailActivity.class);
@@ -132,6 +139,33 @@ public class TicketDetailActivity extends AppCompatActivity {
                 changeTicketState(getString(R.string.app_ticket_states_complete));
             }
         });
+
+        ticketPhotoCard = findViewById(R.id.pictures_card);
+        ticketPhotos = new ImageButton[3];
+        ticketPhotos[0] = findViewById(R.id.ticket_detail_photo1);
+        ticketPhotos[1] = findViewById(R.id.ticket_detail_photo2);
+        ticketPhotos[2] = findViewById(R.id.ticket_detail_photo3);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] urls = ticket.getPictures();
+                switch (v.getId()) {
+                    case R.id.ticket_detail_photo1:
+                        PhotoDetailActivity.actionStart(TicketDetailActivity.this, urls[0]);
+                        break;
+                    case R.id.ticket_detail_photo2:
+                        PhotoDetailActivity.actionStart(TicketDetailActivity.this, urls[1]);
+                        break;
+                    case R.id.ticket_detail_photo3:
+                        PhotoDetailActivity.actionStart(TicketDetailActivity.this, urls[2]);
+                        break;
+                }
+            }
+        };
+
+        for (ImageButton i : ticketPhotos) {
+            i.setOnClickListener(listener);
+        }
     }
 
     @Override
@@ -226,6 +260,29 @@ public class TicketDetailActivity extends AppCompatActivity {
         } else {
             acceptTicket.setVisibility(View.GONE);
             completeTicket.setVisibility(View.GONE);
+        }
+
+        // PhotoCard
+        String[] pics = ticket.getPictures();
+        if (pics != null) {
+            if (pics.length != 0) {
+                ticketPhotoCard.setVisibility(View.VISIBLE);
+                for (int i = 0; i < 3; i++) {
+                    if (i >= pics.length) {
+                        ticketPhotos[i].setVisibility(View.GONE);
+                        continue;
+                    }
+                    Glide.with(this)
+                            .load(pics[i])
+                            .apply(RequestOptions.centerCropTransform())
+                            .into(ticketPhotos[i]);
+                    ticketPhotos[i].setVisibility(View.VISIBLE);
+                }
+            } else {
+                ticketPhotoCard.setVisibility(View.GONE);
+            }
+        } else {
+            ticketPhotoCard.setVisibility(View.GONE);
         }
 
     }

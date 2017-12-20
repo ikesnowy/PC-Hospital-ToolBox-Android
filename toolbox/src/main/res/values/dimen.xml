@@ -35,4 +35,6 @@
     <dimen name="ticket_detail_form_text">18sp</dimen>
     <dimen name="ticket_detail_form_title">24sp</dimen>
 
+    <dimen name="add_ticket_photo_icon_size">80dp</dimen>
+
 </resources>

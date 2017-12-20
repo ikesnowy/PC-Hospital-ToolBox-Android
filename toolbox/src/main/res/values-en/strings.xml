@@ -84,4 +84,6 @@
     <string name="toast_ticket_activity_accept_ticket_failed">Accept ticket failed, check your Internet</string>
     <string name="button_ticket_detail_complete_ticket">Complete</string>
     <string name="toast_ticket_detail_update_state_failed">Update ticket state failed, check your Internet</string>
+    <string name="label_ticket_detail_photo_card">Photo</string>
+    <string name="title_picture_detail">Photo Detail</string>
 </resources>

@@ -32,8 +32,6 @@ public class MainFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
 
-    private static final int TYPE_ADD_TICKET = 3;
-
     public MainFragment() {
         // Required empty public constructor
     }

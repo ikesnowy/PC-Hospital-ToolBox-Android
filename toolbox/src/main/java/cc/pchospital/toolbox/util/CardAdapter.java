@@ -6,7 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -29,6 +32,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         TextView cardNote;
         TextView cardStates;
         TextView cardLocation;
+        ImageView cardPicture;
 
         ViewHolder(View view){
             super(view);
@@ -38,6 +42,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             cardNote = view.findViewById(R.id.card_notes);
             cardStates = view.findViewById(R.id.card_states);
             cardLocation = view.findViewById(R.id.card_location);
+            cardPicture = view.findViewById(R.id.card_picture);
         }
     }
 
@@ -80,6 +85,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.cardNote.setText(card.getTicketNote());
         holder.cardStates.setTextColor(colorDictionary.get(card.getTicketStates()));
         holder.cardStates.setText(labelDictionary.get(card.getTicketStates()));
+        if (card.getTicketIcon() != null) {
+            Glide.with(context).load(card.getTicketIcon()).into(holder.cardPicture);
+        } else {
+            holder.cardPicture.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     @Override

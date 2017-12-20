@@ -9,6 +9,7 @@ public class Card {
     private String ticketLocation;
     private String ticketNote;
     private String ticketStates;
+    private String ticketIcon;
 
     public Card(int id, Long date, String location, String note, String states){
         ticketID = Integer.toString(id);
@@ -64,5 +65,13 @@ public class Card {
 
     public void setTicketStates(String ticketStates) {
         this.ticketStates = ticketStates;
+    }
+
+    public String getTicketIcon() {
+        return ticketIcon;
+    }
+
+    public void setTicketIcon(String ticketIcon) {
+        this.ticketIcon = ticketIcon;
     }
 }

@@ -64,16 +64,6 @@ public class TicketActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.title_ticket_all_ticket);
         }
 
-        // UI-FloatingActionButton
-        final FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TicketActivity.this, AddTicketActivity.class);
-                startActivityForResult(intent, TYPE_ADD_TICKET);
-            }
-        });
-
         // UI-NavigationView
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -107,7 +97,6 @@ public class TicketActivity extends AppCompatActivity {
                         if (actionBar != null) {
                             actionBar.setTitle(R.string.title_ticket_all_ticket);
                         }
-                        fab.setVisibility(View.GONE);
                         replaceFragment(new MainFragment());
                         break;
                     case R.id.nav_about:
@@ -115,7 +104,6 @@ public class TicketActivity extends AppCompatActivity {
                         if (actionBar != null) {
                             actionBar.setTitle(R.string.title_about);
                         }
-                        fab.setVisibility(View.GONE);
                         replaceFragment(new AboutFragment());
                         break;
                     default:

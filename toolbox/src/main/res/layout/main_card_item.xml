@@ -2,24 +2,28 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?android:selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="@dimen/cardview_default_elevation"
     android:layout_margin="@dimen/card_margin">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_margin="@dimen/card_normal_padding">
 
 
         <GridLayout
-            android:layout_width="match_parent"
+            android:id="@+id/card_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:columnCount="1"
+            android:columnCount="2"
             android:rowCount="5"
             android:useDefaultMargins="true">
+
             <LinearLayout
                 android:layout_row="0"
                 android:layout_width="match_parent"
@@ -62,16 +66,27 @@
                 android:minLines="1"
                 android:maxLines="3" />
 
+            <TextView
+                android:id="@+id/card_states"
+                android:layout_column="0"
+                android:layout_row="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:textAlignment="textStart" />
+
+
         </GridLayout>
 
-        <TextView
-            android:id="@+id/card_states"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textAlignment="textEnd" />
+        <ImageView
+            android:id="@+id/card_picture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </android.support.v7.widget.CardView>

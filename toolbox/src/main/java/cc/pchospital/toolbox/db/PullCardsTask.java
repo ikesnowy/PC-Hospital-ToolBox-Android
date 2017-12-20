@@ -50,14 +50,18 @@ public class PullCardsTask extends AsyncTask<String, String, Boolean> {
         if (aBoolean){
             context.get().cards.clear();
             RelativeLayout noCards = context.get().getActivity().findViewById(R.id.no_cards);
-            if (receivedCards.size() == 0){
+            if (receivedCards == null) {
                 noCards.setVisibility(View.VISIBLE);
             } else {
-                context.get().cards.addAll(receivedCards);
-                noCards.setVisibility(View.GONE);
+                if (receivedCards.size() == 0){
+                    noCards.setVisibility(View.VISIBLE);
+                } else {
+                    context.get().cards.addAll(receivedCards);
+                    noCards.setVisibility(View.GONE);
+                }
+                context.get().cardAdapter.notifyDataSetChanged();
+                context.get().recyclerView.setAdapter(context.get().cardAdapter);
             }
-            context.get().cardAdapter.notifyDataSetChanged();
-            context.get().recyclerView.setAdapter(context.get().cardAdapter);
         }
         swipe.setRefreshing(false);
     }
